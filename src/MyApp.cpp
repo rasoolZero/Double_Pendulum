@@ -6,10 +6,13 @@ void MyApp::setup(){
 }
 
 void MyApp::update(){
-    
+    dp.update();
 }
 
 void MyApp::draw(){
-    ci::gl::color(ci::Color::white());
-    ci::gl::drawSolidCircle(ci::app::getWindowCenter(),20);
+    ci::gl::clear();
+    ci::gl::pushModelMatrix();
+    ci::gl::translate(ci::app::getWindowCenter());
+    dp.draw();
+    ci::gl::popModelMatrix();
 }
