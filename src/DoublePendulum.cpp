@@ -1,6 +1,7 @@
 #include "DoublePendulum.h"
 #include "cinder/CinderGlm.h"
 #include "cinder/gl/gl.h"
+#include "Enviroment.h"
 
 DoublePendulum::DoublePendulum(){
     massOne = massTwo = 10;
@@ -28,6 +29,7 @@ void DoublePendulum::updateAcc1(){
     const float a2=angle2;
     const float r1=rodOneLength;
     const float r2=rodTwoLength;
+    const float g = Enviroment::getGravity();
     float num1 = -g * (2 * m1 + m2) * sin(a1);
     float num2 = -m2 * g * sin(a1-2*a2);
     float num3 = -2*sin(a1-a2)*m2;
@@ -42,6 +44,7 @@ void DoublePendulum::updateAcc2(){
     const float a2=angle2;
     const float r1=rodOneLength;
     const float r2=rodTwoLength;
+    const float g = Enviroment::getGravity();
     float num1 = 2 * sin(a1-a2);
     float num2 = (velocity1*velocity1*r1*(m1+m2));
     float num3 = g * (m1 + m2) * cos(a1);
@@ -50,12 +53,13 @@ void DoublePendulum::updateAcc2(){
     acc2 = (num1*(num2+num3+num4)) / den;
 }
 void DoublePendulum::updateAngles(){
+    const float damping = Enviroment::getDamping();
     velocity1+=acc1;
     angle1+=velocity1;
-    //velocity1*=0.99F;
+    velocity1*=damping;
     velocity2+=acc2;
     angle2+=velocity2;
-    //velocity2*=0.99F;
+    velocity2*=damping;
 }
 
 void DoublePendulum::draw(){

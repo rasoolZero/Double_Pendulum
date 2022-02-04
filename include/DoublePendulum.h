@@ -16,6 +16,20 @@ private:
     float angle1;
     float angle2;
 
+    ci::vec2 ball1,ball2;
+    void updateBall1();
+    void updateBall2();
+    void updateAcc1();
+    void updateAcc2();
+    void updateAngles();
+    void drawPart1();
+    void drawPart2();
+
+public:
+    DoublePendulum();
+    void update();
+    void draw();
+
     float getRodOneLength() {
     	return this->rodOneLength;
     }
@@ -94,21 +108,6 @@ private:
     void setAngle2(float angle2) {
     	this->angle2 = angle2;
     }
-
-    const float g = 1.0F;
-    ci::vec2 ball1,ball2;
-    void updateBall1();
-    void updateBall2();
-    void updateAcc1();
-    void updateAcc2();
-    void updateAngles();
-    void drawPart1();
-    void drawPart2();
-
-public:
-    DoublePendulum();
-    void update();
-    void draw();
 };
 
 
