@@ -17,13 +17,16 @@ private:
     float angle2;
 
     ci::vec2 ball1,ball2;
+    ci::PolyLine2 trace;
     void updateBall1();
     void updateBall2();
     void updateAcc1();
     void updateAcc2();
     void updateAngles();
+    void updatePolyline();
     void drawPart1();
     void drawPart2();
+    void drawPolyline();
 
 public:
     DoublePendulum();

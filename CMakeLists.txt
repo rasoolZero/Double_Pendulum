@@ -3,7 +3,8 @@ project(Double_Pendulum VERSION 0.1.0)
 include_directories("${CMAKE_SOURCE_DIR}/../../libraries/sources/Cinder-0.9.2/Cinder/include")
 include_directories("./include")
 set(SOURCE ./src/MyApp.cpp
-            ./src/DoublePendulum.cpp)
+            ./src/DoublePendulum.cpp
+            ./src/Enviroment.cpp)
 include(CTest)
 enable_testing()
 add_executable(Double_Pendulum main.cpp ${SOURCE})

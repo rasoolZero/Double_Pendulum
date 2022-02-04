@@ -1,3 +1,6 @@
+#ifndef ENVIROMENT_H
+#define ENVIROMENT_H
+
 class Enviroment{
 private:
     static float gravity;
@@ -6,20 +9,18 @@ private:
 
 public:
     static float getGravity() {
-    	return Enviroment::gravity;
+    	return gravity;
     }
-    static void setGravity(float gravity = 0.9F) {
-    	Enviroment::gravity = gravity;
+    static void setGravity(float _gravity = 0.9F) {
+    	gravity = _gravity;
     }
 
 
     static float getDamping() {
-    	return Enviroment::damping;
+    	return damping;
     }
-    static void setDamping(float damping = 1.0F) {
-    	Enviroment::damping = damping;
+    static void setDamping(float _damping = 1.0F) {
+    	damping = _damping;
     }
 };
-
-float Enviroment::gravity = 0.9F;
-float Enviroment::damping = 1.0F;
+#endif

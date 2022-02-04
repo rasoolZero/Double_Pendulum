@@ -4,15 +4,18 @@
 #include "Enviroment.h"
 
 DoublePendulum::DoublePendulum(){
-    massOne = massTwo = 10;
-    rodOneLength = rodTwoLength = 100;
+    massOne = massTwo = 40;
+    rodOneLength = rodTwoLength = 200;
     angle1 = angle2 = glm::half_pi<float>();
+    trace = ci::PolyLine2();
+    trace.setClosed(false);
 }
 void DoublePendulum::update(){
     updateAcc1();
     updateAcc2();
     updateBall1();
     updateBall2();
+    updatePolyline();
 }
 void DoublePendulum::updateBall1(){
     ball1.x = rodOneLength * glm::sin(angle1);
@@ -61,12 +64,22 @@ void DoublePendulum::updateAngles(){
     angle2+=velocity2;
     velocity2*=damping;
 }
+void DoublePendulum::updatePolyline(){
+    trace.push_back(ball2);
+}
 
 void DoublePendulum::draw(){
+    drawPolyline();
     ci::gl::lineWidth(3);
     drawPart1();
     drawPart2();
     updateAngles();
+}
+
+void DoublePendulum::drawPolyline(){
+    ci::gl::color(ci::Color::white());
+    ci::gl::lineWidth(0.5F);
+    ci::gl::draw(trace);
 }
 
 void DoublePendulum::drawPart1(){

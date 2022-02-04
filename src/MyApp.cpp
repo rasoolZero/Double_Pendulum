@@ -1,8 +1,10 @@
 #include "MyApp.h"
 #include "cinder/gl/gl.h"
+#include "Enviroment.h"
 void MyApp::setup(){
     ci::app::App::setFullScreen(true);
-    ci::app::App::setFrameRate(30.0F);
+    ci::app::App::setFrameRate(60.0F);
+    Enviroment::setGravity(1.0F);
 }
 
 void MyApp::update(){
