@@ -15,6 +15,12 @@ private:
     float acc2;
     float angle1;
     float angle2;
+    ci::Color rodOneColor;
+    ci::Color rodTwoColor;
+    ci::Color ballOneColor;
+    ci::Color ballTwoColor;
+    ci::Color traceColor;
+
 
     ci::vec2 ball1,ball2;
     ci::PolyLine2 trace;
@@ -110,6 +116,45 @@ public:
     }
     void setAngle2(float angle2) {
     	this->angle2 = angle2;
+    }
+
+    ci::Color getRodOneColor() {
+    	return this->rodOneColor;
+    }
+    void setRodOneColor(ci::Color & rodOneColor) {
+    	this->rodOneColor = rodOneColor;
+    }
+
+
+    ci::Color getRodTwoColor() {
+    	return this->rodTwoColor;
+    }
+    void setRodTwoColor(ci::Color & rodTwoColor) {
+    	this->rodTwoColor = rodTwoColor;
+    }
+
+
+    ci::Color getBallOneColor() {
+    	return this->ballOneColor;
+    }
+    void setBallOneColor(ci::Color & ballOneColor) {
+    	this->ballOneColor = ballOneColor;
+    }
+
+
+    ci::Color getBallTwoColor() {
+    	return this->ballTwoColor;
+    }
+    void setBallTwoColor(ci::Color & ballTwoColor) {
+    	this->ballTwoColor = ballTwoColor;
+    }
+
+
+    ci::Color getTraceColor() {
+    	return this->traceColor;
+    }
+    void setTraceColor(ci::Color & traceColor) {
+    	this->traceColor = traceColor;
     }
 };
 

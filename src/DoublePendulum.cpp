@@ -9,6 +9,7 @@ DoublePendulum::DoublePendulum(){
     angle1 = angle2 = glm::half_pi<float>();
     trace = ci::PolyLine2();
     trace.setClosed(false);
+    rodOneColor = rodTwoColor = ballOneColor = ballTwoColor = traceColor = ci::Color::white();
 }
 void DoublePendulum::update(){
     updateAcc1();
@@ -56,7 +57,7 @@ void DoublePendulum::updateAcc2(){
     acc2 = (num1*(num2+num3+num4)) / den;
 }
 void DoublePendulum::updateAngles(){
-    const float damping = Enviroment::getDamping();
+    const float damping = ci::lmap<float>(Enviroment::getDamping(),0.0F,1.0F,0.95F,1.0F); //reducing the effect of damping
     velocity1+=acc1;
     angle1+=velocity1;
     velocity1*=damping;
@@ -77,19 +78,21 @@ void DoublePendulum::draw(){
 }
 
 void DoublePendulum::drawPolyline(){
-    ci::gl::color(ci::Color::white());
+    ci::gl::color(traceColor);
     ci::gl::lineWidth(0.5F);
     ci::gl::draw(trace);
 }
 
 void DoublePendulum::drawPart1(){
     const static ci::vec2 origin;
-    ci::gl::color(ci::Color(1,0,0));
+    ci::gl::color(rodOneColor);
     ci::gl::drawLine(origin,ball1);
-    ci::gl::drawSolidCircle(ball1,massOne);
+    ci::gl::color(ballOneColor);
+    ci::gl::drawSolidCircle(ball1,massOne/2);
 }
 void DoublePendulum::drawPart2(){
-    ci::gl::color(ci::Color(0,1,0));
+    ci::gl::color(rodTwoColor);
     ci::gl::drawLine(ball1,ball2);
-    ci::gl::drawSolidCircle(ball2,massTwo);
+    ci::gl::color(ballTwoColor);
+    ci::gl::drawSolidCircle(ball2,massTwo/2);
 }
