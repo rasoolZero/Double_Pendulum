@@ -11,6 +11,9 @@ public:
 private:
     DoublePendulum dp;
     float startingAngle1,startingAngle2;
+    bool drawTrace=true;
+    bool drawDP=true;
+    bool paused=false;
     ci::params::InterfaceGlRef interface;
     void setupParams();
     void setupPartOneParams();
@@ -18,6 +21,7 @@ private:
     void setupEnviromentParams();
     void setupColorParams();
     void setupControls();
+    void reset();
 };
 
 

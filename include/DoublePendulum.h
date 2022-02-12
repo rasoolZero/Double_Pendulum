@@ -37,7 +37,8 @@ private:
 public:
     DoublePendulum();
     void update();
-    void draw();
+    void draw(bool drawDP,bool drawTrace, bool paused);
+    void clearTrace();
 
     float getRodOneLength() {
     	return this->rodOneLength;

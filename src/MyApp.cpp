@@ -24,6 +24,9 @@ void MyApp::setupParams(){
     interface->addSeparator();
     interface->addText("Color");
     setupColorParams();
+    interface->addSeparator();
+    interface->addText("Control");
+    setupControls();
 }
 
 void MyApp::setupPartOneParams(){
@@ -90,15 +93,39 @@ void MyApp::setupColorParams(){
     interface->addParam<ci::Color>("Trace Color",traceColorSetter,traceColorGetter);
 }
 
+void MyApp::setupControls(){
+    interface->addParam<bool>("Paused",&paused);
+    interface->addParam<bool>("Draw Double Pendulum",&drawDP);
+    interface->addParam<bool>("Draw Trace",&drawTrace);
+    interface->addSeparator();
+
+
+    startingAngle1 = glm::degrees(dp.getAngle1());
+    startingAngle2 = glm::degrees(dp.getAngle2());
+    interface->addParam<float>("Starting Angle 1",&startingAngle1);
+    interface->addParam<float>("Starting Angle 2",&startingAngle2);
+    std::function<void ()> callback = std::bind(&MyApp::reset,this);
+    interface->addButton("Reset",callback);
+}
+
+void MyApp::reset(){
+    dp.setVelocity1(0.0F);
+    dp.setVelocity2(0.0F);
+    dp.setAngle1(glm::radians(startingAngle1));
+    dp.setAngle2(glm::radians(startingAngle2));
+    dp.clearTrace();
+}
+
 void MyApp::update(){
-    dp.update();
+    if(!paused)
+        dp.update();
 }
 
 void MyApp::draw(){
     ci::gl::clear();
     ci::gl::pushModelMatrix();
     ci::gl::translate(ci::app::getWindowWidth()/2.0F,ci::app::getWindowHeight()/4.0F);
-    dp.draw();
+    dp.draw(drawDP,drawTrace,paused);
     ci::gl::popModelMatrix();
     interface->draw();
 }

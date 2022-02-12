@@ -65,16 +65,24 @@ void DoublePendulum::updateAngles(){
     angle2+=velocity2;
     velocity2*=damping;
 }
+void DoublePendulum::clearTrace(){
+    trace = ci::PolyLine2();
+}
+
 void DoublePendulum::updatePolyline(){
     trace.push_back(ball2);
 }
 
-void DoublePendulum::draw(){
-    drawPolyline();
+void DoublePendulum::draw(bool drawDP, bool drawTrace, bool paused){
+    if(drawTrace)
+        drawPolyline();
     ci::gl::lineWidth(3);
-    drawPart1();
-    drawPart2();
-    updateAngles();
+    if(drawDP){
+        drawPart1();
+        drawPart2();
+    }
+    if(!paused)
+        updateAngles();
 }
 
 void DoublePendulum::drawPolyline(){
