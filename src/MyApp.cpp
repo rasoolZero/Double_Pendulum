@@ -7,6 +7,12 @@ void MyApp::setup(){
     ci::app::App::setFrameRate(60.0F);
     Enviroment::setGravity(1.0F);
     setupParams();
+    dp.update();
+}
+
+void MyApp::keyDown(ci::app::KeyEvent event){
+    if(event.getCode()==ci::app::KeyEvent::KEY_SPACE)
+        paused=!paused;
 }
 
 void MyApp::setupParams(){
