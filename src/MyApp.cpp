@@ -97,9 +97,14 @@ void MyApp::setupControls(){
     interface->addParam<bool>("Paused",&paused);
     interface->addParam<bool>("Draw Double Pendulum",&drawDP);
     interface->addParam<bool>("Draw Trace",&drawTrace);
+
     interface->addSeparator();
+    auto & scaleOption = interface->addParam<float>("scale",&scale);
+    scaleOption.step(0.05F);
+    scaleOption.max(1.0F);
+    scaleOption.min(0.1F);
 
-
+    interface->addSeparator();
     startingAngle1 = glm::degrees(dp.getAngle1());
     startingAngle2 = glm::degrees(dp.getAngle2());
     interface->addParam<float>("Starting Angle 1",&startingAngle1);
@@ -125,6 +130,7 @@ void MyApp::draw(){
     ci::gl::clear();
     ci::gl::pushModelMatrix();
     ci::gl::translate(ci::app::getWindowWidth()/2.0F,ci::app::getWindowHeight()/4.0F);
+    ci::gl::scale(scale,scale);
     dp.draw(drawDP,drawTrace,paused);
     ci::gl::popModelMatrix();
     interface->draw();

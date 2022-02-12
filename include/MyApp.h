@@ -11,6 +11,7 @@ public:
 private:
     DoublePendulum dp;
     float startingAngle1,startingAngle2;
+    float scale=1.0F;
     bool drawTrace=true;
     bool drawDP=true;
     bool paused=false;
